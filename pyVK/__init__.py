@@ -1,4 +1,4 @@
-from urllib import request, parse
+from urllib import request, parse, error
 from http import cookiejar
 from html.parser import HTMLParser
 from .exceptions import VKAuthError
@@ -7,18 +7,22 @@ import json
 
 
 class Api:
-    _V_API = 5.64
 
-    def __init__(self, token=None, expires_in=None, user_id=None):
+    def __init__(self, v_api, token=None, expires_in=None, user_id=None):
         self.token = token
         self.expires_in = expires_in
         self.user_id = user_id
+        self.v_api = v_api
 
     def auth(self, app_id, scope, login, password):
         opener = request.build_opener(request.HTTPCookieProcessor(cookiejar.CookieJar()), request.HTTPRedirectHandler())
-        response_auth = opener.open("https://oauth.vk.com/authorize?client_id={}"
-                                    "&display=page&redirect_uri=https://oauth.vk.com/blank.htm&scope={}"
-                                    "&response_type=token&v={}".format(app_id, scope, self._V_API))
+
+        try:
+            response_auth = opener.open("https://oauth.vk.com/authorize?client_id={}"
+                                        "&display=page&redirect_uri=https://oauth.vk.com/blank.htm&scope={}"
+                                        "&response_type=token&v={}".format(app_id, scope, self.v_api))
+        except error.HTTPError:
+            raise VKAuthError("Don't auth, may be wrong app id or scope")
 
         parser = AuthFormParser()
         parser.feed(str(response_auth.read()))
@@ -46,14 +50,14 @@ class Api:
 
     def call_method(self, method: str, params: dict):
         url = "https://api.vk.com/method/{}?{}&access_token={}&v={}".format(method, parse.urlencode(params),
-                                                                            self.token, self._V_API)
+                                                                            self.token, self.v_api)
         response = request.urlopen(url).read().decode('utf-8')
         return json.loads(response)
 
 
 class AuthFormParser(HTMLParser):
     def __init__(self):
-        super(HTMLParser, self).__init__()
+        super().__init__()
         self.url = None
         self.params = {}
         self._in_form = False

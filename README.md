@@ -15,8 +15,11 @@ from pyVK import Api
 ### Если токен уже получен
 
 ```python
-api = Api(token, expires_in, user_id)
+api = Api(v_api, token, expires_in, user_id)
 ```
+
+**v_api** - Версия API согласно ВК
+
 **token** - Собственно токен
 
 **expires_id** - Время жизни токена
@@ -26,9 +29,11 @@ api = Api(token, expires_in, user_id)
 ### Получения токена, используя логин и пароль
 
 ```python
-api = Api()
+api = Api(v_api)
 api.auth(app_id, scope, login, password)
 ```
+
+**v_api** - Версия API согласно ВК
 
 **app_id** - ID вашего приложения
 
