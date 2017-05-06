@@ -22,7 +22,7 @@ class Api:
                                         "&display=page&redirect_uri=https://oauth.vk.com/blank.htm&scope={}"
                                         "&response_type=token&v={}".format(app_id, scope, self.v_api))
         except error.HTTPError:
-            raise VKAuthError("Don't auth, may be wrong app id or scope")
+            raise VKAuthError("Don't auth, may be wrong app id")
 
         parser = AuthFormParser()
         parser.feed(str(response_auth.read()))
