@@ -1,7 +1,7 @@
 from urllib import request, parse
 from http import cookiejar
 from html.parser import HTMLParser
-from exceptions import VKAuthError
+from .exceptions import VKAuthError
 import re
 import json
 

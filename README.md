@@ -1,3 +1,10 @@
+# Установка
+```
+$ git clone git@github.com:Mereng/pyVKApi.git
+$ cd pyVKApi
+$ python setup.py install
+```
+
 # Работа с библиотекой
 
 ```
@@ -7,7 +14,7 @@ from pyVK import Api
 
 ### Если токен уже получен
 
-```
+```python
 api = Api(token, expires_in, user_id)
 ```
 
@@ -19,7 +26,7 @@ api = Api(token, expires_in, user_id)
 
 ### Получения токена, используя логин и пароль
 
-```
+```python
 api = Api()
 api.auth(app_id, scope, login, password)
 ```
@@ -32,7 +39,7 @@ api.auth(app_id, scope, login, password)
 
 ## Вызов методов
 
-```
+```python
 response = api.call_method(method, params)
 ```
 
