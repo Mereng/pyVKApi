@@ -7,7 +7,7 @@ $ python setup.py install
 
 # Работа с библиотекой
 
-```
+```python
 from pyVK import Api
 ```
 ## Авторизация
@@ -17,7 +17,6 @@ from pyVK import Api
 ```python
 api = Api(token, expires_in, user_id)
 ```
-
 **token** - Собственно токен
 
 **expires_id** - Время жизни токена
