@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(
-    name="pYVK",
+    name="pYVKApi",
     version="1.0.0",
     description="Пакет для работы с API vk.com",
     author='Mereng',

@@ -1,4 +1,12 @@
 # Установка
+
+## Через pip
+```
+$ pip install pyVKApi
+```
+
+## В ручную
+
 ```
 $ git clone git@github.com:Mereng/pyVKApi.git
 $ cd pyVKApi
