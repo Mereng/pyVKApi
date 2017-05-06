@@ -33,7 +33,7 @@ class Api:
         if url_parse.path != '/blank.html':
             query = parse.parse_qs(url_parse.query)
             if 'email' in query:
-                raise VKAuthError()
+                raise VKAuthError("Wrong login or pass")
             action_allow = re.findall(r'(?<=<form\smethod=\"post\"\saction=\").*(?=\")', response_allow.read()
                                       .decode("utf-8"))[0]
             response_allow = opener.open(action_allow)
@@ -53,7 +53,7 @@ class Api:
 
 class AuthFormParser(HTMLParser):
     def __init__(self):
-        super().__init__()
+        super(HTMLParser, self).__init__()
         self.url = None
         self.params = {}
         self._in_form = False
